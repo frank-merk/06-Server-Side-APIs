@@ -10,3 +10,18 @@
 
 // Ajax to pull API
 
+var cities = [];
+
+
+$(".btn").on("click", function(event) {
+    event.preventDefault();
+    var APIKey = "fecb5e83c287868897c1ddcf3fb5404f";
+var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=Minneapolis&appid=" + APIKey;
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response) {
+        console.log(response);
+      });
+    
+});
