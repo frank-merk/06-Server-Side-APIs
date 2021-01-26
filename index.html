@@ -8,8 +8,33 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
+    <header class = "jumbotron">
+        <h1>Open Weather Dashboard</h1>
+    </header>
 
-
+    <main>
+        <div class = "row">
+            <div class = "col-md-3 sidebar border">
+                <form class = "p-4" id = "search-bar">
+                    <label>Search a city</label>
+                    <input id="city" type = "text"  class = "form-input"/>
+                    <br />
+                    <button class = "btn btn-primary" type = "submit">Search</button>
+                </form>
+                <div id = "previous-search" class="searched-cities ">TEST</div>  
+            </div>
+            <div class = "col-md weather-area">
+                <h2 id="current-city"></h2>
+                <p id ="temp"></p>
+                <p id ="humidity"></p>
+                <p id ="wind"></p>
+                <p id ="UV"></p>
+                <hr>
+                <h2>5-Day Forecast:</h2>
+                <div class = "col-md"
+            </div>  
+        </div>
+    </main>
 
 
 

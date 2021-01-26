@@ -1,0 +1,32 @@
+input {
+    margin-bottom: 15px;
+}
+
+
+.jumbotron {
+    background-color: navy;
+    color: white;
+    border-radius: 0;
+    text-align: center;
+    padding: 30px 0px;
+}
+.p-4 {
+    width: 100%;
+}
+
+.form-input {
+    width: 100%;
+}
+
+.sidebar, .weather-area {
+    margin: 5px 20px;
+    border-radius: 10px;
+
+}
+
+.searched-cities {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid lightgray;
+}
