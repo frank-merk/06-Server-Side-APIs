@@ -15,13 +15,21 @@ var cities = [];
 
 $(".btn").on("click", function(event) {
     event.preventDefault();
+    var city = $("#city").val().trim();
     var APIKey = "fecb5e83c287868897c1ddcf3fb5404f";
-var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=Minneapolis&appid=" + APIKey;
+var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
     $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function(response) {
         console.log(response);
+        var temp = Math.round(response.main.temp * (9/5) - 459.67) + "°F";
+        var humidity = response.main.humidity + "%";
+        var wind = Math.round(response.wind.speed) + " MPH";
+        
+        console.log(temp);
+        console.log(humidity);
+        console.log(wind);
       });
     
 });
