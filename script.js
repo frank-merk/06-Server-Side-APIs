@@ -16,7 +16,7 @@ var DateTime = luxon.DateTime;
 var dt = DateTime.local();
 
 // store the current date as a string, displaying month, date, and year
-var currentDate = dt.toLocaleString(DateTime.DATE_MED);
+var currentDate = dt.toLocaleString(DateTime.DATE_SHORT);
 var cities = [];
 
 
@@ -34,22 +34,19 @@ var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&a
         var humidity = response.main.humidity + "%";
         var wind = Math.round(response.wind.speed) + " MPH";
 
+        var iconId = response.weather[0].icon;
+        var iconSrc = "https://openweathermap.org/img/w/" + iconId + ".png";
+        $(".icon").attr("src", iconSrc);
+
        $("#current-city").text(city + " weather for " + currentDate);
 
        $("#temp").text("Temperature: " + temp);
        $("#humidity").text("Humidity: " + humidity);
        $("#wind").text("Wind: " + wind);
-       
-
-        
-        console.log(lon);
-        console.log(lat);
         
         console.log(temp);
         console.log(humidity);
         console.log(wind);
-
-
 
         var lon = response.coord.lon;
         var lat = response.coord.lat;
