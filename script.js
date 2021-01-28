@@ -17,13 +17,19 @@ var dt = DateTime.local();
 
 // store the current date as a string, displaying month, date, and year
 var currentDate = dt.toLocaleString(DateTime.DATE_SHORT);
-var cities = [];
 
+var cities = [];
+function saveCity() {
+  localStorage.setItem("cities", cities)
+}
 
 $(".btn").on("click", function(event) {
     event.preventDefault();
 
     var city = $("#city").val().trim();
+    cities.push(city); 
+    console.log(city);
+    console.log(cities);
     var APIKey = 
     "fecb5e83c287868897c1ddcf3fb5404f";
 
@@ -31,20 +37,34 @@ $(".btn").on("click", function(event) {
 
     var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
 
+    
+
     $.ajax({
       url: weatherQueryURL,
       method: "GET",
       statusCode: {
           404: function() {
             alert("The city is mispelled or not in our weather database. Try another.");
+            
+          },
+          400: function() {
+            alert("Please Enter A City");
+            
+          },
+          401: function() {
+            alert("Please Enter A City");
+            
           }
         }    
-  });
+    });
+
+    
 
     $.ajax({
         url: weatherQueryURL,
         method: "GET"
       }).then(function(response) {
+        saveCity();
         console.log(response);
         var temp = Math.round(response.main.temp * (9/5) - 459.67) + "°F";
         var humidity = response.main.humidity + "%";
@@ -63,7 +83,8 @@ $(".btn").on("click", function(event) {
         console.log(temp);
         console.log(humidity);
         console.log(wind);
-
+        
+        
         var lon = response.coord.lon;
         var lat = response.coord.lat;
 
@@ -79,13 +100,33 @@ $(".btn").on("click", function(event) {
             $("#UV").text("UV Index: " + UV);
         });
 
-      });
+        $.ajax({
+          url: forecastQueryURL,
+          method: "GET"
+        }).then(function(response) {
+          console.log(response);
+          var dateTimes = response.list;
+          console.log(dateTimes);
 
-      $.ajax({
-        url: forecastQueryURL,
-        method: "GET"
-      }).then(function(response) {
-        console.log(response);
-    });
+          for (i = 4; i < 37; i = i + 8) {
+            var date = dateTimes[i].dt_txt;
+            var display = DateTime.fromSQL(date).toLocaleString(DateTime.DATE_SHORT);
+            console.log(display);
+            var newIcon = dateTimes[i].weather[0].icon;
+            var newIconURL = "http://openweathermap.org/img/w/" + newIcon + ".png";
+            var newTemp = Math.round(dateTimes[i].main.temp * (9/5) - 459.67) + " °F";
+            var newHumidity = "Humidity " + dateTimes[i].main.humidity + "%";
+            var newWind = "Wind: " + Math.round(dateTimes[i].wind.speed) + " MPH";
+
+            console.log(newTemp);
+            console.log(newHumidity);
+            console.log(newWind);
+            var dateCard = $(".five-day-forecast").append("<div>");
+            dateCard.attr("class", "col-md-2 new-forecast-card");
+            dateCard.html("<h4>" + display + "</h4>" + "<img alt = 'icon' src = '" + newIconURL + "' />" + "<p>" + newTemp + "</p>" + "<p>" + newHumidity + "</p>" + "<p>" + newWind + "</p>");
+
+          }
+      });
+      });
     
 });
