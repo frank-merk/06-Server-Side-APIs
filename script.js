@@ -32,13 +32,14 @@ $(".btn").on("click", function(event) {
     var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
 
     $.ajax({
-      url: queryURL,
+      url: weatherQueryURL,
       method: "GET",
       statusCode: {
           404: function() {
             alert("The city is mispelled or not in our weather database. Try another.");
           }
         }    
+  });
 
     $.ajax({
         url: weatherQueryURL,
