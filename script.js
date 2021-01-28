@@ -20,8 +20,22 @@ var currentDate = dt.toLocaleString(DateTime.DATE_SHORT);
 
 $(".weather-area").hide();
 var cities = [];
+
 function saveCity() {
-  localStorage.setItem("cities", cities)
+  localStorage.setItem("cities", JSON.stringify(cities))
+}
+
+function getCity() {
+  var storedCities = JSON.parse(localStorage.getItem("cities"));
+  for (i = 0; i < cities.length; i++) {
+    console.log(storedCities[i]);
+  }
+}
+
+getCity();
+
+function prevCities() {
+  local
 }
 
 $(".btn").on("click", function(event) {
