@@ -18,6 +18,7 @@ var dt = DateTime.local();
 // store the current date as a string, displaying month, date, and year
 var currentDate = dt.toLocaleString(DateTime.DATE_SHORT);
 
+$(".weather-area").hide();
 var cities = [];
 function saveCity() {
   localStorage.setItem("cities", cities)
@@ -64,6 +65,7 @@ $(".btn").on("click", function(event) {
         url: weatherQueryURL,
         method: "GET"
       }).then(function(response) {
+        $(".weather-area").show();
         saveCity();
         console.log(response);
         var temp = Math.round(response.main.temp * (9/5) - 459.67) + "°F";
@@ -108,6 +110,7 @@ $(".btn").on("click", function(event) {
           var dateTimes = response.list;
           console.log(dateTimes);
 
+          var dateCard = [];
           for (i = 4; i < 37; i = i + 8) {
             var date = dateTimes[i].dt_txt;
             var display = DateTime.fromSQL(date).toLocaleString(DateTime.DATE_SHORT);
@@ -121,11 +124,15 @@ $(".btn").on("click", function(event) {
             console.log(newTemp);
             console.log(newHumidity);
             console.log(newWind);
-            var dateCard = $(".five-day-forecast").append("<div>");
-            dateCard.attr("class", "col-md-2 new-forecast-card");
-            dateCard.html("<h4>" + display + "</h4>" + "<img alt = 'icon' src = '" + newIconURL + "' />" + "<p>" + newTemp + "</p>" + "<p>" + newHumidity + "</p>" + "<p>" + newWind + "</p>");
-
+            
+            var newDateCard = $("<div>");
+            newDateCard.attr("class", "col-md-2 new-date-card");
+            newDateCard.html("<h4>" + display + "</h4>" + "<img alt = 'icon' src = '" + newIconURL + "' />" + "<p>" + newTemp + "</p>" + "<p>" + newHumidity + "</p>" + "<p>" + newWind + "</p>");
+            dateCard.push(newDateCard);
+            
+            $(".five-day-forecast").append(newDateCard);
           }
+          console.log(dateCard);
       });
       });
     
