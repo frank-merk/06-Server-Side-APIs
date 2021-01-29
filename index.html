@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Pulling in Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Weather Dashboard</title>
@@ -19,12 +20,15 @@
                     <label><strong>Search a city</strong></label>
                     <input id="city" type = "text"  class = "form-input"/>
                     <br />
+                    <!-- Main Search Button with ID selector -->
                     <button class = "btn btn-primary" type = "submit">Search</button>
                 </form>
+                <!-- area to populate previous cities -->
                 <ul id = "previous-search" class="searched-cities"></ul>  
             </div>
             <div class = "col-md weather-area">
                 <div class = "row">
+                    <!-- Today's forecast is populated here -->
                     <div class = "col-md weather-area">
                         <h2 id="current-city"></h2>
                         <img class = "icon" alt = "Weather Icon" />
@@ -35,13 +39,12 @@
                         <hr>
                     </div>
                 </div>    
-                <h2>5-Day Forecast:</h2>    
+                <h2>5-Day Forecast:</h2>
+                <!-- Five day forecast goes here -->    
                 <div class="row card-group five-day-forecast"></div>
             </div>  
         </div>
     </main>
-
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <!-- Calling in Luxon API -->
