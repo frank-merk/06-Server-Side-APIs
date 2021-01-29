@@ -24,6 +24,23 @@ input {
 
 }
 
+.city-button {
+    border-radius: 5px;
+    margin: 15px;
+    padding: 15px;
+    list-style: none;
+    background-color: lightgrey;
+    
+}
+
+.new-date-card {
+    background-color: lightskyblue;
+    border-radius: 15px;
+   
+    margin: 15px;
+}
+
+
 .searched-cities {
     margin-bottom: 10px;
     padding: 10px;
